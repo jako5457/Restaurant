@@ -49,13 +49,7 @@ namespace ServiceLayer
         {
             _ctx.Restaurants.Add(newRestaurant);
             return newRestaurant;
-        }
-
-        public int Commit()
-        {
-            _ctx.SaveChanges();
-            return 0;
-        }
+        }   
 
         public Restaurant Delete(int id)
         {
@@ -65,6 +59,17 @@ namespace ServiceLayer
                 _ctx.Restaurants.Remove(restaurant);
             }
             return restaurant;
+        }
+
+        public int GetCountOfRestaurants()
+        {
+            return _ctx.Restaurants.Count();
+        }
+
+        public int Commit()
+        {
+            _ctx.SaveChanges();
+            return 0;
         }
     }
 }
