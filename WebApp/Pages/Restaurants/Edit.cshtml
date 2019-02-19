@@ -7,8 +7,13 @@
 
 <h2>Editing @Model.Restaurant.Name</h2>
 
+<img src="@Model.Restaurant.ImageUrl" alt="Alternate Text" class="img-thumbnail my-4" />
+
 <form method="post">
     <input type="hidden" asp-for="Restaurant.Id" />
+    <input type="hidden" asp-for="Restaurant.ImageUrl" />
+    
+
     <div class="form-group">
         <label asp-for="Restaurant.Name" />
         <input asp-for="Restaurant.Name" class="form-control" />

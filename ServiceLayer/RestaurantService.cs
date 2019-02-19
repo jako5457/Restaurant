@@ -37,6 +37,7 @@ namespace ServiceLayer
         public Restaurant Update(Restaurant updatedRedstaurant)
         {
             _ctx.Restaurants.Update(updatedRedstaurant);
+            //_ctx.Entry<Restaurant>(updatedRedstaurant).Property(x => x.ImageUrl).IsModified = false;
 
             //var entity = _ctx.Restaurants.Attach(updatedRedstaurant);
             //entity.State = EntityState.Modified;
