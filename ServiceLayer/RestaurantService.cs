@@ -11,7 +11,7 @@ namespace ServiceLayer
 
         public RestaurantService(AppDbContext ctx)
         {
-            ctx.Database.EnsureCreated();
+            ctx.Database.EnsureCreated();   // lav til kommentar for at Add-demo
             _ctx = ctx;
         }
 
