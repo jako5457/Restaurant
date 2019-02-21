@@ -1,0 +1,34 @@
+﻿@page
+@model WebApp.Pages.Restaurants.ClientRestaurantsModel
+@{
+    ViewData["Title"] = "ClientRestaurants";
+}
+
+<h1>Client Restaurants</h1>
+
+<table id="restaurants" class="table"></table>
+
+@section Scripts {
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.css" />
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.js"></script>
+
+
+    <script>
+        $(function () {
+            $.ajax("/api/restaurants/",
+                { method: "get" })
+                .then(function (response) {
+                    $("#restaurants").dataTable({
+                        data: response,
+                        columns: [
+                            { "data": "name" },
+                            { "data": "location" },
+                            { "data": "cuisine" }
+                        ]
+                    });
+                });
+        });
+    </script>
+}
