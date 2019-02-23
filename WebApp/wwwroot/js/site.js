@@ -13,6 +13,3 @@
 
     $.validator.setDefaults(defaultOptions);
 })();
-
-// Husk at linke til filen fra _ValidationScriptsPartial.cshtml
-// og at tilføje PartialView til de sider, der skal valideres
