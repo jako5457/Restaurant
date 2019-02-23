@@ -1,4 +1,18 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿(function () {
+    var defaultOptions = {
+        highlight: function (element) {
+            var $formGroup = $(element).closest(".form-group");
+            $formGroup.find(".form-control").addClass('is-invalid');
+        },
+        unhighlight: function (element) {
+            var $formGroup = $(element).closest(".form-group");
+            $formGroup.find(".form-control").removeClass('is-invalid');
+            $formGroup.find(".form-control").addClass('is-valid');
+        }
+    };
 
-// Write your Javascript code.
+    $.validator.setDefaults(defaultOptions);
+})();
+
+// Husk at linke til filen fra _ValidationScriptsPartial.cshtml
+// og at tilføje PartialView til de sider, der skal valideres
