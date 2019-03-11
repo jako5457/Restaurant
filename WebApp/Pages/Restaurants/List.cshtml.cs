@@ -4,11 +4,12 @@ using ServiceLayer;
 using System.Collections.Generic;
 using System.Linq;
 
+using Microsoft.AspNetCore.Mvc;
+
 namespace OdeToFoodWebApp.Pages.Restaurants
 {
     public class ListModel : PageModel
     {
-        public string Message { get; set; }
         public IEnumerable<Restaurant> Restaurants { get; set; }
 
 
@@ -19,10 +20,14 @@ namespace OdeToFoodWebApp.Pages.Restaurants
             _restaurantService = restaurantService;
         }
 
-
         public void OnGet()
         {
             Restaurants = _restaurantService.GetRestaurants().ToList();
         }
+
+        //public void OnGet([FromServices] IRestaurantService _restaurantService)
+        //{
+        //    Restaurants = _restaurantService.GetRestaurants().ToList();
+        //}
     }
 }
