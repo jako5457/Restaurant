@@ -6,16 +6,17 @@
 
 <h1>Restaurants</h1>
 
-@*<form method="get">
+<form method="get">
     <div class="input-group mb-3">
-        <input type="search"asp-for="@Model.SearchTerm" class="form-control">
+        <input type="search" id="searchTerm" name="searchTerm" value="" class="form-control">
+        @*<input type="search" asp-for="@Model.SearchTerm" class="form-control">*@
         <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="submit">
                 <i class="fas fa-search"></i>
             </button>
         </div>
     </div>
-</form>*@
+</form>
 
 <table class="table">
     @foreach (var restaurant in Model.Restaurants)

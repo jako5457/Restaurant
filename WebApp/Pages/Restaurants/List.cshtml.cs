@@ -9,11 +9,10 @@ namespace OdeToFoodWebApp.Pages.Restaurants
 {
     public class ListModel : PageModel
     {
-        public string Message { get; set; }
         public IEnumerable<Restaurant> Restaurants { get; set; }
 
-        [BindProperty(SupportsGet = true)]
-        public string SearchTerm { get; set; }
+        //[BindProperty(SupportsGet = true)]
+        //public string SearchTerm { get; set; }
 
 
         private readonly IRestaurantService _restaurantService;
@@ -24,14 +23,21 @@ namespace OdeToFoodWebApp.Pages.Restaurants
         }
 
 
-        //public void OnGet(string searchTerm)
+        #region UDEN MODELBINDING
         public void OnGet()
         {
-            Restaurants = _restaurantService.GetRestaurants().ToList();
+            string searchTerm = HttpContext.Request.QueryString.Value.Split('=').LastOrDefault();
 
-            //string searchTerm = HttpContext.Request.QueryString.Value.Split('=').LastOrDefault();  // Uden Model binding
-
-            //Restaurants = _restaurantService.GetRestaurantsByName(SearchTerm).ToList();
+            Restaurants = _restaurantService.GetRestaurantsByName(searchTerm).ToList();
         }
+        #endregion
+
+        #region MED MODELBINDING
+        //public void OnGet(string SearchTerm)
+        //public void OnGet()
+        //{
+        //    Restaurants = _restaurantService.GetRestaurantsByName(SearchTerm).ToList();
+        //}
+        #endregion
     }
 }
