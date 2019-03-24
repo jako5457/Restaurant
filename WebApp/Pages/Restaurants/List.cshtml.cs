@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using ServiceLayer;
 using System.Collections.Generic;
 using System.Linq;
-
 using Microsoft.AspNetCore.Mvc;
 
 namespace OdeToFoodWebApp.Pages.Restaurants
@@ -12,13 +11,14 @@ namespace OdeToFoodWebApp.Pages.Restaurants
     {
         public IEnumerable<Restaurant> Restaurants { get; set; }
 
-
+        #region DI
         private readonly IRestaurantService _restaurantService;
 
         public ListModel(IRestaurantService restaurantService)
         {
             _restaurantService = restaurantService;
         }
+        #endregion
 
         public void OnGet()
         {
