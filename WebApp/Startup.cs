@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceLayer;
+using System;
 
 namespace WebApp
 {
@@ -31,6 +32,19 @@ namespace WebApp
 
             services.AddScoped<IRestaurantService, RestaurantService>();
 
+            #region SESSION
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromSeconds(100);
+                options.Cookie.HttpOnly = true;
+                // Make the session cookie essential
+                options.Cookie.IsEssential = true;
+            });
+            #endregion
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -50,6 +64,11 @@ namespace WebApp
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            #region SESSION
+            app.UseSession();
+            //app.UseHttpContextItemsMiddleware();
+            #endregion
 
             app.UseMvc();
         }
