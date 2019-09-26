@@ -1,4 +1,5 @@
 ﻿using DataLayer.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ServiceLayer;
@@ -9,12 +10,14 @@ namespace OdeToFoodWebApp.Pages.Restaurants
 {
     public class ListModel : PageModel
     {
+        public const string SessionKeyLastReviewed = "_Mark";
+        public int? SessionInfo_LastReviewed { get; private set; }
+
         public string Message { get; set; }
         public IEnumerable<Restaurant> Restaurants { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public string SearchTerm { get; set; }
-
 
         private readonly IRestaurantService _restaurantService;
 
