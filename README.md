@@ -1,4 +1,7 @@
 ## 1.Architecture
+
+Denne tutorial benytter **.NET Core 3.0** til WebApi og **.NET Standard 2.1** til classlibraies.
+
 Opret følgende projekter
 * WebApp (Razor Pages Web App)
 * ServiceLayer (.NET Standard class library)
@@ -12,20 +15,22 @@ Opret projekt referencerne:
 Installér følgende NuGet-pakker vha. PMC:
 ```powershell
 Install-Package Microsoft.VisualStudio.Web.BrowserLink -ProjectName WebApp
+Install-Package Microsoft.EntityFrameworkCore.InMemory -ProjectName WebApp
 Install-Package Microsoft.EntityFrameworkCore.SqlServer -ProjectName DataLayer
 Install-Package Microsoft.EntityFrameworkCore.Tools -ProjectName DataLayer
 ```
 
 ## 2. WebApp
-Tilføj til StartUp.cs:
+For InMemory database tilføjes til ConfigureServices:
+```c#
+services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("InMemoryDb"));
+```
+
+Tilføj til StartUp.cs under Configure hvis Environment er Developer:
 ```c#
 app.UseBrowserLink();
 ```
 
-For InMemory database tilføjes til service:
-```c#
-services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("InMemoryDb"));
-```
 
 ## 3. DataLayer
 Opret AppDbContext.cs med følgende indhold:
