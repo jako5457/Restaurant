@@ -5,6 +5,7 @@ Her sker følgende:
 - Data Seeding
 - Service interface, class and methods
 - ListView and Dependency Injection
+- Lave Custom Default Route
 
 
 ### DataLayer
@@ -108,4 +109,16 @@ Her kan også benyttes Method-injection:
 public void OnGet([FromServices] IRestaurantService _restaurantService)
 ```
 
-Tilføj evt. Restaurants til menuen i _Layout.cshtml.
+Tilføj Restaurants til menuen i _Layout.cshtml.
+
+#### Custom Default Route Page
+I stedet for at lande på Index siden og skulle navigere til Restaurants/List siden, kan man oprette en Custom Default Route Page i Startup-filen. 
+Det sker ved at tilføje en RazorPagesOption til servicen, som vist her:
+```c#
+services.AddRazorPages()
+    .AddRazorPagesOptions(options =>
+    {
+        options.Conventions.AddPageRoute("/Restaurants/List", "");
+    }); 
+```
+Imidlertid er der en indbygget konvention som siger at siten altid skal begynde med Pages/Index og derfor bliver man nødt til at omdøbe Index pagen. 
