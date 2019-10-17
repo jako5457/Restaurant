@@ -8,12 +8,27 @@
 
 
 <table class="table">
-    @foreach (var restaurant in Model.Restaurants)
-    {
+    <thead>
         <tr>
-            <td>@restaurant.Name</td>
-            <td>@restaurant.Location</td>
-            <td>@restaurant.Cuisine</td>
+            <th>
+                @Html.DisplayNameFor(model => model.Restaurants[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Restaurants[0].Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Restaurants[0].Cuisine)
+            </th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var restaurant in Model.Restaurants)
+        {
+            <tr>
+                <td>@restaurant.Name</td>
+                <td>@restaurant.Location</td>
+                <td>@restaurant.Cuisine</td>
+            </tr>
+        }
+        </tbody>
 </table>

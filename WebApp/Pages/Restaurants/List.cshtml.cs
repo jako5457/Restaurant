@@ -9,7 +9,7 @@ namespace OdeToFoodWebApp.Pages.Restaurants
 {
     public class ListModel : PageModel
     {
-        public IEnumerable<Restaurant> Restaurants { get; set; }
+        public IList<Restaurant> Restaurants { get; set; }
 
         #region DI
         private readonly IRestaurantService _restaurantService;
