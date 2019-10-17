@@ -14,7 +14,7 @@ namespace OdeToFoodWebApp.Pages.Restaurants
         public int? SessionInfo_LastReviewed { get; private set; }
 
         public string Message { get; set; }
-        public IEnumerable<Restaurant> Restaurants { get; set; }
+        public IList<Restaurant> Restaurants { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public string SearchTerm { get; set; }
