@@ -10,7 +10,7 @@ namespace OdeToFoodWebApp.Pages.Restaurants
     public class ListModel : PageModel
     {
         public string Message { get; set; }
-        public IEnumerable<Restaurant> Restaurants { get; set; }
+        public IList<Restaurant> Restaurants { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public string SearchTerm { get; set; }
