@@ -8,8 +8,7 @@
 
 <form method="get">
     <div class="input-group mb-3">
-        <input type="search" id="searchTerm" name="searchTerm" value="" class="form-control">
-        @*<input type="search" asp-for="@Model.SearchTerm" class="form-control">*@
+        <input type="search" asp-for="@Model.SearchTerm" class="form-control">
         <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="submit">
                 <i class="fas fa-search"></i>
@@ -19,17 +18,32 @@
 </form>
 
 <table class="table">
-    @foreach (var restaurant in Model.Restaurants)
-    {
-    <tr>
-        <td>@restaurant.Name</td>
-        <td>@restaurant.Location</td>
-        <td>@restaurant.Cuisine</td>
-        @*<td>
-            <a asp-page="./Detail" asp-route-restaurantId="@restaurant.Id">
-                <i class="fas fa-info-circle"></i>
-            </a>
-        </td>*@
-    </tr>
-    }
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Restaurants[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Restaurants[0].Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Restaurants[0].Cuisine)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var restaurant in Model.Restaurants)
+        {
+            <tr>
+                <td>@restaurant.Name</td>
+                <td>@restaurant.Location</td>
+                <td>@restaurant.Cuisine</td>
+                @*<td>
+                        <a asp-page="./Detail" asp-route-restaurantId="@restaurant.Id">
+                            <i class="fas fa-info-circle"></i>
+                        </a>
+                    </td>*@
+            </tr>
+        }
+    </tbody>
 </table>
