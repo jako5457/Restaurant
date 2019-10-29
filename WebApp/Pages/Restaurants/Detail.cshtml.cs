@@ -8,8 +8,10 @@ namespace WebApp.Pages.Restaurants
 {
     public class DetailModel : PageModel
     {
+        #region SESSION DEMO
         public const string SessionKeyLastReviewed = "_Mark";
         public int? SessionInfo_LastReviewed { get; private set; }
+        #endregion
 
         public Restaurant Restaurant { get; set; }
 

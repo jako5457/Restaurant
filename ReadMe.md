@@ -24,7 +24,7 @@ app.UseSession();
 ```
 
 
-Her vises hvordan en Integer skrives til en Session-variabel (øvrig kode er fjernet for at gøre det tydeligere):
+Her vises hvordan en ```Integer``` skrives til en Session-variabel (øvrig kode er fjernet for at gøre det tydeligere):
 ```c#
 public class DetailModel : PageModel
 {
