@@ -1,12 +1,13 @@
 ﻿# 2.ListOfRestaurants
 
-Her sker følgende:
-- Opret Entiteter
-- Data Seeding
-- Service interface, class and methods
-- ListView and Dependency Injection
-- Lave Custom Default Route
+> Her sker følgende:
+> - Opret Entiteter
+> - Data Seeding
+> - Service interface, class and methods
+> - ListView and Dependency Injection
+> - Lave Custom Default Route
 
+&nbsp;
 
 ### DataLayer
 Opret klasserne i *Entities* folderen:
@@ -40,6 +41,8 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
  
+&nbsp;
+
 ### ServiceLayer
 Opret interface og implementering af service:
 ```c#
@@ -66,10 +69,14 @@ public class RestaurantService : IRestaurantService
 
 Bemærk ```ctx.Database.EnsureCreated()```, som sikrer at ```OnModelCreating()``` bliver kørt og InMemory databasen bliver initialiseret. Fjernes ved brug af manuel Migration.
 
+&nbsp;
 
 ### WebApp
-Opret folder **Pages | Restaurants**
+Opret folder **Pages | Restaurants**.
+
 Opret Razor Page kaldet **List**:
+
+**View:**
 ```html
 <table class="table">
     @foreach (var restaurant in Model.Restaurants)
@@ -83,7 +90,7 @@ Opret Razor Page kaldet **List**:
 </table>
 ```
 
-View:
+**PageModel:**
 ```c#
 public class ListModel : PageModel
 {
@@ -104,15 +111,17 @@ public class ListModel : PageModel
 }
 ```
 
-Her kan også benyttes Method-injection: 
+Alternativt kan man benytte *Method-injection* i stedet for Constructor-injection: 
 ```c#
 public void OnGet([FromServices] IRestaurantService _restaurantService)
 ```
 
-Tilføj Restaurants til menuen i _Layout.cshtml.
+Tilføj *Restaurants* til menuen i `_Layout.cshtml`.
+
+&nbsp;
 
 #### Custom Default Route Page
-I stedet for at lande på Index siden og skulle navigere til Restaurants/List siden, kan man oprette en Custom Default Route Page i Startup-filen. 
+I stedet for at lande på *Index* siden og skulle navigere til *Restaurants/List* siden, kan man oprette en *Custom Default Route Page* i `Startup`-filen. 
 Det sker ved at tilføje en RazorPagesOption til servicen, som vist her:
 ```c#
 services.AddRazorPages()
@@ -121,4 +130,4 @@ services.AddRazorPages()
         options.Conventions.AddPageRoute("/Restaurants/List", "");
     }); 
 ```
-Imidlertid er der en indbygget konvention som siger at siten altid skal begynde med Pages/Index og derfor bliver man nødt til at omdøbe Index pagen. 
+Imidlertid er der en indbygget konvention som siger at siten altid skal begynde med *Pages/Index* og derfor bliver man nødt til at omdøbe *Index* pagen eller fjerne den. 
