@@ -3,6 +3,8 @@ Der oprettes en mulighed for at søge (første del af navnet og case-sensitivt):
 
 ![Search](IndexList.png)
 
+&nbsp;
+
 ### ServiceLayer
 
 *RestaurantService* udvides med en metode, der kan tage imod en søgeparameter:
@@ -23,7 +25,8 @@ public IQueryable<Restaurant> GetRestaurantsByName(string name = null)
         .OrderBy(r => r.Name);
 }
 ```
-  
+
+&nbsp;
 
 ### WebApp
 Tilføj en searchbox til List view. Med BootStrap 4 laves en searchbox således:
@@ -40,13 +43,13 @@ Tilføj en searchbox til List view. Med BootStrap 4 laves en searchbox således:
 </form>
 ```
 
-Bemærk at der er linket til CSS-filen fra *Font Awesome* i _Layout.
-Man kan evt. demonstrere en input uden brug af asp-for, der så vil kræve både id, name og value:
+Bemærk at der er linket til CSS-filen fra *Font Awesome* i `_Layout`.
+Man kan evt. demonstrere en `input` uden brug af `asp-for`, der så vil kræve både `id`, `name` og `value`:
 ```html
 <input type="search" id="SearchTerm" name="SearchTerm" value="@Model.SearchTerm">
 ```
 
-Her ses PageModel:
+Her ses ***PageModel***:
 ```c#
 public class ListModel : PageModel
 {
@@ -69,7 +72,7 @@ public class ListModel : PageModel
 }
 ```
 
-Bemærk at der laves en *TwoWay Databinding* ved at tilføje ```[BindProperty]``` til SearchTerm. Og at den bringes til at supportere Get.
+Bemærk at der laves en *TwoWay Databinding* ved at tilføje ```[BindProperty]``` til *SearchTerm*. Og at den bringes til at supportere `GET`.
 
 Man man også vise to andre (og mindre smarte) måder:
 Uden Model Binding:
@@ -84,7 +87,8 @@ public void OnGet(string searchTerm)
 }
 ```
 
----
+&nbsp;
+
 ## Detail Page
 ### ServiceLayer
 Tilføj  ```GetRestarantById(int)``` til RestaurantService:
@@ -95,6 +99,7 @@ public Restaurant GetRestaurantById(int restaurantId)
 }
 ```
 
+&nbsp;
 
 ### WebApp
 Opret en Razor Page kaldet **Detail** i Restaurant-folderen.
@@ -165,6 +170,8 @@ Tilføjelse af **Route** i toppen af Details.cs:
 @page "{restaurantId:int}"
 ```
 Hvilket giver en URL: **Restaurants/Detail/3** i stedet for Restaurants/Detail?restaurantId=3
+
+&nbsp;
 
 #### Håndtering af Bad Requests
 Hvis brugeren ændrer URL’en til et ID, der ikke findes, så kastes en exception. Dette skal undgås.
