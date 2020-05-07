@@ -19,6 +19,7 @@ Install-Package Microsoft.EntityFrameworkCore.InMemory -ProjectName WebApp
 Install-Package Microsoft.EntityFrameworkCore.SqlServer -ProjectName DataLayer
 Install-Package Microsoft.EntityFrameworkCore.Tools -ProjectName DataLayer
 ```
+&nbsp;
 
 ## 2. WebApp
 For InMemory database tilføjes til ConfigureServices:
@@ -30,7 +31,7 @@ Tilføj til StartUp.cs under Configure hvis Environment er Developer:
 ```c#
 app.UseBrowserLink();
 ```
-
+&nbsp;
 
 ## 3. DataLayer
 Opret AppDbContext.cs med følgende indhold:
@@ -50,6 +51,8 @@ public class AppDbContext : DbContext
 ```
 
 Opret folder kaldet *Entities*.
+
+&nbsp;
 
 ### 4. ServiceLayer
 Tomt
