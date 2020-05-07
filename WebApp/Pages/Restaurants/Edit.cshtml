@@ -24,10 +24,10 @@
         <select asp-for="Restaurant.Cuisine"
                 asp-items="Html.GetEnumSelectList<DataLayer.Entities.CuisineType>()"
                 class="form-control">
-            <option value="">Choose Cuisine</option>
+            <option value="" disabled>Choose Cuisine</option>
         </select>
-        </div>
-        <button type="submit" class="btn btn-info">Save</button>
+    </div>
+    <button type="submit" class="btn btn-info">Save</button>
 </form>
 
 @section Scripts{

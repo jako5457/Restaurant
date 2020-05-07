@@ -6,7 +6,8 @@ namespace DataLayer.Entities
     {
         public int Id { get; set; }
 
-        [Required, StringLength(80)]
+        [Required(ErrorMessage = "Påkrævet")]
+        [StringLength(80, ErrorMessage = "Maks. 80 karakterer")]
         public string Name { get; set; }
 
         [Required, StringLength(255)]
