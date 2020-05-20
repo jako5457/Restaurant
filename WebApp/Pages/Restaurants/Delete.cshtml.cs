@@ -1,7 +1,10 @@
 ﻿using DataLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.FileProviders;
 using ServiceLayer;
+using System;
+using System.IO;
 
 namespace WebApp.Pages.Restaurants
 {
@@ -30,6 +33,7 @@ namespace WebApp.Pages.Restaurants
         {
             var restaurant = _restaurantService.Delete(restaurantId);
             _restaurantService.Commit();
+            DeleteImage(restaurantId);
 
             if (restaurant == null)
             {
@@ -37,7 +41,21 @@ namespace WebApp.Pages.Restaurants
             }
 
             TempData["Message"] = $"{restaurant.Name} deleted";
-            return RedirectToPage("./List");   
+            return RedirectToPage("./List");
+        }
+
+        public void DeleteImage(int id)
+        {
+            var filepath = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img")).Root + $@"{id}.jpg";
+
+            try
+            {
+                System.IO.File.Delete(filepath);
+            }
+            catch (Exception ex)
+            {
+                TempData["Message"] = ex.Message;
+            }
         }
     }
 }

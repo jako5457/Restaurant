@@ -5,7 +5,7 @@ using ServiceLayer;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OdeToFoodWebApp.Pages.Restaurants
+namespace WebApp.Pages.Restaurants
 {
     public class ListModel : PageModel
     {

@@ -1,13 +1,13 @@
 ﻿@page "{restaurantId:int}"
 
-@model WebApp.Pages.Restaurants.DetailModel
+@model DetailModel
 @{
     ViewData["Title"] = "Detail";
 }
 
 <h2>@Model.Restaurant.Name</h2>
 <div>
-    <img src="@Model.Restaurant.ImageUrl" alt="Alternate Text" class="img-thumbnail my-4" />
+    <img src="~/img/@Url.Content(Model.Restaurant.Id.ToString() + ".jpg")" class="img-fluid" />
 </div>
 
 <div>
@@ -21,8 +21,8 @@
 </div>
 
 
+<a asp-page="./List" class="btn btn-info mt-3">All Restaurants</a>
 
-<a asp-page="./List" class="btn btn-info">All Restaurants</a>
 
 @section footer {
     @if (Model.Message != null)
