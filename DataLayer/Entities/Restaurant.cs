@@ -12,8 +12,10 @@ namespace DataLayer.Entities
         [Required, StringLength(255)]
         public string Location { get; set; }
 
-
         public string ImageUrl { get; set; }
+
+        public byte[] ImageData { get; set; }   
+
 
         public CuisineType Cuisine { get; set; }
     }

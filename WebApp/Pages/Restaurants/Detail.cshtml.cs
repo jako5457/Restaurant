@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ServiceLayer;
+using System;
 
 namespace WebApp.Pages.Restaurants
 {
@@ -21,6 +22,13 @@ namespace WebApp.Pages.Restaurants
         public IActionResult OnGet(int restaurantId)
         {
             Restaurant = _restaurantService.GetRestaurantById(restaurantId);
+
+            if (Restaurant.ImageData != null)
+            {
+                string imageBase64Data = Convert.ToBase64String(Restaurant.ImageData);
+                string imageDataUrl = string.Format($"data:image/jpg;base64, {imageBase64Data}");
+                Restaurant.ImageUrl = imageDataUrl;
+            }
 
             if (Restaurant == null)
             {

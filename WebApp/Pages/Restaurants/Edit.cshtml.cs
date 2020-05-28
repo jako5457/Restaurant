@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.FileProviders;
 using ServiceLayer;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -29,6 +30,14 @@ namespace WebApp.Pages.Restaurants
             if (restaurantId.HasValue)
             {
                 Restaurant = _restaurantService.GetRestaurantById(restaurantId.Value);
+
+                if (Restaurant.ImageData != null)
+                {
+                    string imageBase64Data = Convert.ToBase64String(Restaurant.ImageData);
+                    string imageDataUrl = string.Format($"data:image/jpg;base64, {imageBase64Data}");
+                    Restaurant.ImageUrl = imageDataUrl;
+                }
+                
             }
             else
             {
@@ -51,16 +60,23 @@ namespace WebApp.Pages.Restaurants
             }
             if (Restaurant.Id > 0)
             {
-                await UploadFetchImageAsync(Restaurant.Id);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    FormFile.CopyTo(ms);
+                    Restaurant.ImageData = ms.ToArray();
+                }
                 _restaurantService.Update(Restaurant);
-                _restaurantService.Commit();
             }
             else
             {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    FormFile.CopyTo(ms);
+                    Restaurant.ImageData = ms.ToArray();
+                }
                 _restaurantService.Add(Restaurant);
-                _restaurantService.Commit();
-                await UploadFetchImageAsync(Restaurant.Id);
-            }        
+            }
+            _restaurantService.Commit();
 
             TempData["Message"] = "Restaurant saved!";
             return RedirectToPage("./Detail", new { restaurantId = Restaurant.Id });

@@ -9,7 +9,7 @@
 
 @if (@Model.Restaurant.Id > 0)
 {
-    <img src="~/img/@Url.Content(Model.Restaurant.Id.ToString() + ".jpg")" class="img-fluid mb-4"  />
+    <img src="@Model.Restaurant.ImageUrl" class="img-fluid mb-4" />
 }
 
 <form method="post" enctype="multipart/form-data">
