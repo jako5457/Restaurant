@@ -1,6 +1,6 @@
 ## 1.Architecture
 
-Denne tutorial benytter **.NET Core 3.0** til WebApi og **.NET Standard 2.1** til classlibraies.
+Denne tutorial benytter **.NET Core 3.1** til WebApi og **.NET Standard 2.1** til classlibraies.
 
 Opret følgende projekter
 * WebApp (Razor Pages Web App)
