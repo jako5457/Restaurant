@@ -120,6 +120,8 @@ Tilføj *Restaurants* til menuen i `_Layout.cshtml`.
 
 &nbsp;
 
+## Configuraton
+
 #### Custom Default Route Page
 I stedet for at lande på *Index* siden og skulle navigere til *Restaurants/List* siden, kan man oprette en *Custom Default Route Page* i `Startup`-filen. 
 Det sker ved at tilføje en RazorPagesOption til servicen, som vist her:
@@ -131,3 +133,27 @@ services.AddRazorPages()
     }); 
 ```
 Imidlertid er der en indbygget konvention som siger at siten altid skal begynde med *Pages/Index* og derfor bliver man nødt til at omdøbe *Index* pagen eller fjerne den. 
+
+#### Configuration af Service
+
+RestaurantService skal registreres i Startup.cs i IOC-containeren (IOC = Invetion of Control).
+
+```csharp
+services.AddScoped<IRestaurantService, RestaurantService>();
+```
+
+#### Runtime compilation 
+
+Kræver Nuget pakken: `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation` og følgende tilføjelse til AddRazorPages-servicen:
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddRazorPages()
+        .AddRazorRuntimeCompilation();
+
+    // code omitted for brevity
+}
+```
+Læs mere her: [Razor file compilation in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/view-compilation?view=aspnetcore-3.1&tabs=visual-studio
+)
