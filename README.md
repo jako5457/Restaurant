@@ -62,7 +62,7 @@ public class RestaurantService : IRestaurantService
     }
     public IQueryable<Restaurant> GetRestaurants() 
     {
-        return _ctx.Restaurants;
+        return _ctx.Restaurants.AsNoTracking();
     }
 }
 ```
@@ -141,19 +141,3 @@ RestaurantService skal registreres i Startup.cs i IOC-containeren (IOC = Invetio
 ```csharp
 services.AddScoped<IRestaurantService, RestaurantService>();
 ```
-
-#### Runtime compilation 
-
-Kræver Nuget pakken: `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation` og følgende tilføjelse til AddRazorPages-servicen:
-
-```csharp
-public void ConfigureServices(IServiceCollection services)
-{
-    services.AddRazorPages()
-        .AddRazorRuntimeCompilation();
-
-    // code omitted for brevity
-}
-```
-Læs mere her: [Razor file compilation in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/view-compilation?view=aspnetcore-3.1&tabs=visual-studio
-)
