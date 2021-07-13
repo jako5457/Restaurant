@@ -1,5 +1,6 @@
 ﻿using DataLayer;
 using DataLayer.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace ServiceLayer
@@ -15,7 +16,7 @@ namespace ServiceLayer
         }
         public IQueryable<Restaurant> GetRestaurants() 
         {
-            return _ctx.Restaurants;
+            return _ctx.Restaurants.AsNoTracking();
         }
     }
 }
