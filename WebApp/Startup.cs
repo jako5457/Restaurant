@@ -27,7 +27,6 @@ namespace WebApp
             services.AddScoped<IRestaurantService, RestaurantService>();
 
             services.AddRazorPages()
-               .AddRazorRuntimeCompilation()
                .AddRazorPagesOptions(options =>
                {
                    options.Conventions.AddPageRoute("/Restaurants/List", "");
