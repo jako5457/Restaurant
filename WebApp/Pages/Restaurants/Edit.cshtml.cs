@@ -1,9 +1,11 @@
 ﻿using DataLayer.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.FileProviders;
 using ServiceLayer;
-using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace WebApp.Pages.Restaurants
 {
@@ -11,21 +13,19 @@ namespace WebApp.Pages.Restaurants
     {
         [BindProperty]
         public Restaurant Restaurant { get; set; }
-        public IEnumerable<SelectListItem> Cuisines { get; set; }
+
+        [BindProperty]
+        public IFormFile FormFile { get; set; }
 
         private readonly IRestaurantService _restaurantService;
-        private IHtmlHelper _htmlHelper;
 
-        public EditModel(IRestaurantService restaurantService, IHtmlHelper htmlHelper)
+        public EditModel(IRestaurantService restaurantService)
         {
             _restaurantService = restaurantService;
-            _htmlHelper = htmlHelper;
         }
 
         public IActionResult OnGet(int? restaurantId)
         {
-            Cuisines = _htmlHelper.GetEnumSelectList<CuisineType>();
-
             if (restaurantId.HasValue)
             {
                 Restaurant = _restaurantService.GetRestaurantById(restaurantId.Value);
@@ -34,7 +34,6 @@ namespace WebApp.Pages.Restaurants
             {
                 Restaurant = new Restaurant();
             }
-            
 
             if (Restaurant == null)
             {
@@ -43,25 +42,42 @@ namespace WebApp.Pages.Restaurants
             return Page();
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
             if (!ModelState.IsValid)
             {
-                Cuisines = _htmlHelper.GetEnumSelectList<CuisineType>();
                 return Page();
-               
+
             }
             if (Restaurant.Id > 0)
             {
+                await UploadFetchImageAsync(Restaurant.Id);
                 _restaurantService.Update(Restaurant);
+                _restaurantService.Commit();
             }
             else
             {
                 _restaurantService.Add(Restaurant);
+                _restaurantService.Commit();
+                await UploadFetchImageAsync(Restaurant.Id);
             }
-            _restaurantService.Commit();
+
             TempData["Message"] = "Restaurant saved!";
             return RedirectToPage("./Detail", new { restaurantId = Restaurant.Id });
+        }
+
+        public async Task<IActionResult> UploadFetchImageAsync(int id)
+        {
+            if (FormFile?.Length > 0)
+            {
+                var filepath = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img")).Root + $@"{id}.jpg";
+
+                using (var stream = System.IO.File.Create(filepath))
+                {
+                    await FormFile.CopyToAsync(stream);
+                }
+            }
+            return Page();
         }
     }
 }

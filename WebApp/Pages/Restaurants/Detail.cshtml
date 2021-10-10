@@ -7,7 +7,7 @@
 
 <h2>@Model.Restaurant.Name</h2>
 <div>
-    <img src="@Model.Restaurant.ImageUrl" alt="Alternate Text" class="img-thumbnail my-4" />
+    <img src="~/img/@Url.Content(Model.Restaurant.Id.ToString() + ".jpg")" class="img-fluid" />
 </div>
 
 <dl class="row">

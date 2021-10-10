@@ -7,12 +7,25 @@
 
 <h2>Editing @Model.Restaurant.Name</h2>
 
-<img src="@Model.Restaurant.ImageUrl" alt="Alternate Text" class="img-thumbnail my-4" />
+@if (@Model.Restaurant.Id > 0)
+{
+    <img src="~/img/@Url.Content(Model.Restaurant.Id.ToString() + ".jpg")" class="img-fluid mb-4" />
+}
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <input type="hidden" asp-for="Restaurant.Id" />
     <input type="hidden" asp-for="Restaurant.ImageUrl" />
-    
+    <input type="hidden" asp-for="FormFile" />
+
+    <dl>
+        <dt>
+            <label asp-for="FormFile"></label>
+        </dt>
+        <dd>
+            <input asp-for="FormFile" type="file">
+            <span asp-validation-for="FormFile"></span>
+        </dd>
+    </dl>
 
     <div class="form-group">
         <label asp-for="Restaurant.Name" class="control-label"></label>
@@ -27,9 +40,13 @@
     <div class="form-group">
         <label asp-for="Restaurant.Cuisine" class="control-label"></label>
         <select asp-for="Restaurant.Cuisine"
-                asp-items="Model.Cuisines"
+                asp-items="Html.GetEnumSelectList<DataLayer.Entities.CuisineType>()"
                 class="form-control"></select>
         <span class="text-danger" asp-validation-for="Restaurant.Cuisine"></span>
     </div>
-    <button type="submit" class="btn btn-info">Save</button>
+    <button type="submit" class="btn btn-info mt-3">Save</button>
 </form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
