@@ -7,28 +7,32 @@
 
 <h2>Editing @Model.Restaurant.Name</h2>
 
-<form method="post">
-    <input type="hidden" asp-for="Restaurant.Id" />
-    <div class="form-group">
-        <label asp-for="Restaurant.Name" />
-        <input asp-for="Restaurant.Name" class="form-control" />
-        <span class="text-danger" asp-validation-for="Restaurant.Name"></span>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <input type="hidden" asp-for="Restaurant.Id" />
+            <div class="form-group">
+                <label asp-for="Restaurant.Name" class="control-label"></label>
+                <input asp-for="Restaurant.Name" class="form-control" />
+                <span asp-validation-for="Restaurant.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Restaurant.Location" class="control-label"></label>
+                <input asp-for="Restaurant.Location" class="form-control" />
+                <span asp-validation-for="Restaurant.Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Restaurant.Cuisine"></label>
+                <select asp-for="Restaurant.Cuisine"
+                        asp-items="Html.GetEnumSelectList<DataLayer.Entities.CuisineType>()"
+                        class="form-control">
+                    <option value="" disabled>Choose Cuisine</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-info">Save</button>
+        </form>
     </div>
-    <div class="form-group">
-        <label asp-for="Restaurant.Location" />
-        <input asp-for="Restaurant.Location" class="form-control" />
-        <span class="text-danger" asp-validation-for="Restaurant.Location"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Restaurant.Cuisine" />
-        <select asp-for="Restaurant.Cuisine"
-                asp-items="Html.GetEnumSelectList<DataLayer.Entities.CuisineType>()"
-                class="form-control">
-            <option value="" disabled>Choose Cuisine</option>
-        </select>
-    </div>
-    <button type="submit" class="btn btn-info">Save</button>
-</form>
+</div>
 
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />
