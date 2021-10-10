@@ -3,7 +3,7 @@
 
 <div class="col-sm-3">
     <div class="card my-3">
-        <img  class="card-img-top" src="@Model.ImageUrl">
+        <img src="~/img/@Url.Content(Model.Id.ToString() + ".jpg")" class="img-fluid" />
         <div class="card-body">
             <h5 class="card-title">@Model.Name</h5>
             <p class="card-text">@Model.Location</p>
