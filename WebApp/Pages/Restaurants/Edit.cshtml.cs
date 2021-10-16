@@ -19,8 +19,6 @@ namespace WebApp.Pages.Restaurants
 
         private readonly IRestaurantService _restaurantService;
 
-        public bool Favorite { get; set; }
-
         public EditModel(IRestaurantService restaurantService)
         {
             _restaurantService = restaurantService;
@@ -30,8 +28,7 @@ namespace WebApp.Pages.Restaurants
         {
             if (restaurantId.HasValue)
             {
-                Restaurant = _restaurantService.GetRestaurantById(restaurantId.Value);
-                Favorite = Request.Cookies["MyFavorite"] is not null ? true : false;       
+                Restaurant = _restaurantService.GetRestaurantById(restaurantId.Value);      
             }
             else
             {
@@ -57,7 +54,8 @@ namespace WebApp.Pages.Restaurants
                 await UploadFetchImageAsync(Restaurant.Id);
                 _restaurantService.Update(Restaurant);
                 _restaurantService.Commit();
-                Response.Cookies.Append("MyFavorite", Restaurant.Id.ToString());
+
+                Response.Cookies.Append("MyFavorite", Restaurant.Id.ToString());    // Cookie appended
             }
             else
             {
@@ -66,7 +64,7 @@ namespace WebApp.Pages.Restaurants
                 await UploadFetchImageAsync(Restaurant.Id);
             }        
 
-            TempData["Message"] = "Restaurant saved!";
+            TempData["Message"] = "Restaurant saved and Cookie is appended!";
             return RedirectToPage("./Detail", new { restaurantId = Restaurant.Id });
         }
 
