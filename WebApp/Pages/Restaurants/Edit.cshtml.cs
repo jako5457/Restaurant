@@ -57,6 +57,7 @@ namespace WebApp.Pages.Restaurants
                 await UploadFetchImageAsync(Restaurant.Id);
                 _restaurantService.Update(Restaurant);
                 _restaurantService.Commit();
+                Response.Cookies.Append("MyFavorite", Restaurant.Id.ToString());
             }
             else
             {
@@ -81,12 +82,6 @@ namespace WebApp.Pages.Restaurants
                 }
             }
             return Page();
-        }
-
-        public void OnPostFavorite()
-        {
-            Response.Cookies.Append("MyFavorite", "true");
-
         }
     }
 }
