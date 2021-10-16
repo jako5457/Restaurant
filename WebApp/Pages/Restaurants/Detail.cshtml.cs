@@ -31,9 +31,7 @@ namespace WebApp.Pages.Restaurants
 
             #region SESSION DEMO
             // Requires: using Microsoft.AspNetCore.Http;
-            {
-                HttpContext.Session.SetInt32(SessionKeyLastReviewed, Restaurant.Id); 
-            }
+            HttpContext.Session.SetInt32(SessionKeyLastReviewed, Restaurant.Id); 
 
             // Local test of Session variable
             SessionInfo_LastReviewed = HttpContext.Session.GetInt32(SessionKeyLastReviewed);
