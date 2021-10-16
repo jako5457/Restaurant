@@ -19,6 +19,8 @@ namespace WebApp.Pages.Restaurants
 
         private readonly IRestaurantService _restaurantService;
 
+        public bool Favorite { get; set; }
+
         public EditModel(IRestaurantService restaurantService)
         {
             _restaurantService = restaurantService;
@@ -29,6 +31,7 @@ namespace WebApp.Pages.Restaurants
             if (restaurantId.HasValue)
             {
                 Restaurant = _restaurantService.GetRestaurantById(restaurantId.Value);
+                Favorite = Request.Cookies["MyFavorite"] is not null ? true : false;       
             }
             else
             {
@@ -78,6 +81,12 @@ namespace WebApp.Pages.Restaurants
                 }
             }
             return Page();
+        }
+
+        public void OnPostFavorite()
+        {
+            Response.Cookies.Append("MyFavorite", "true");
+
         }
     }
 }
