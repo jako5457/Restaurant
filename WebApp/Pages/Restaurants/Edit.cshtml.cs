@@ -54,8 +54,6 @@ namespace WebApp.Pages.Restaurants
                 await UploadFetchImageAsync(Restaurant.Id);
                 _restaurantService.Update(Restaurant);
                 _restaurantService.Commit();
-
-                Response.Cookies.Append("MyFavorite", Restaurant.Id.ToString());    // Cookie appended
             }
             else
             {
@@ -64,7 +62,7 @@ namespace WebApp.Pages.Restaurants
                 await UploadFetchImageAsync(Restaurant.Id);
             }        
 
-            TempData["Message"] = "Restaurant saved and Cookie is appended!";
+            TempData["Message"] = "Restaurant saved!";
             return RedirectToPage("./Detail", new { restaurantId = Restaurant.Id });
         }
 

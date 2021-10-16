@@ -22,6 +22,10 @@ namespace WebApp.Pages.Restaurants
         {
             Restaurant = _restaurantService.GetRestaurantById(restaurantId);
 
+            #region COOKIE DEMO
+            Response.Cookies.Append("MyFavorite", Restaurant.Id.ToString());
+            #endregion
+
             if (Restaurant == null)
             {
                 return RedirectToPage("./NotFound");
