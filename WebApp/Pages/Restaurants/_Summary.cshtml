@@ -3,7 +3,14 @@
 
 @{
     var favorite = Context.Request.Cookies["MyFavorite"];
-    bool highlight = Int32.Parse(favorite) == Model.Id ? true : false;
+
+    int favoriteId;
+    bool highlight = false;
+
+    if (Int32.TryParse(favorite, out favoriteId))
+    {
+        highlight = favoriteId == Model.Id ? true : false;
+    }
 }
 
 <div class="col-sm-3">

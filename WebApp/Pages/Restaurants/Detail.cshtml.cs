@@ -1,7 +1,9 @@
 ﻿using DataLayer.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ServiceLayer;
+using System;
 
 namespace WebApp.Pages.Restaurants
 {
@@ -23,7 +25,12 @@ namespace WebApp.Pages.Restaurants
             Restaurant = _restaurantService.GetRestaurantById(restaurantId);
 
             #region COOKIE DEMO
-            Response.Cookies.Append("MyFavorite", Restaurant.Id.ToString());
+            var cookieOptions = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(30),
+                IsEssential = true
+            };
+            Response.Cookies.Append("MyFavorite", Restaurant.Id.ToString(), cookieOptions);
             #endregion
 
             if (Restaurant == null)
