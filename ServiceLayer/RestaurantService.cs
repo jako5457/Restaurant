@@ -10,11 +10,8 @@ namespace ServiceLayer
 
         public RestaurantService(AppDbContext ctx)
         {
-            ctx.Database.EnsureCreated();
             _ctx = ctx;
         }
-
-       
 
         public IQueryable<Restaurant> GetRestaurants() 
         {

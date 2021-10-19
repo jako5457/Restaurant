@@ -1,0 +1,24 @@
+version: '3.4'
+
+services:
+  webapp:
+    image: ${DOCKER_REGISTRY-}webapp
+    build:
+      context: .
+      dockerfile: WebApp/Dockerfile
+      args:
+        - "SERVER=sqlserver"
+        - "DATABASENAME=RestaurantDB"
+        - "SQLUSER=sa"
+        - "SQLPASS=LAmP33rG0dt"
+    links:
+        - "sqlserver"
+  sqlserver:
+    image: ${DOCKER_REGISTRY-}sqlserver
+    build:
+        context: .
+        dockerfile: SqlServer.Dockerfile
+        args:
+            - "SECRET=LAmP33rG0dt"
+    ports:
+        - 8433:1433/tcp
