@@ -1,14 +1,10 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
-ARG SQLSERVER
-ARG DATABASENAME
-ARG SQLUSER
-ARG SQLPASS
-
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
+
+ENV CONNECTIONSTRING "Server=sqlserver;Database=RestaurantDB;User Id=sa;Password=P@ssw0rd;"
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
@@ -26,4 +22,4 @@ RUN dotnet publish "WebApp.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "WebApp.dll","'$SQLSERVER'","'$DATABASENAME'","'$SQLUSER'","'$SQLPASS'"]
+ENTRYPOINT ["dotnet", "WebApp.dll"]

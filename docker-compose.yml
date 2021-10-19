@@ -6,13 +6,10 @@ services:
     build:
       context: .
       dockerfile: WebApp/Dockerfile
-      args:
-        - "SERVER=sqlserver"
-        - "DATABASENAME=RestaurantDB"
-        - "SQLUSER=sa"
-        - "SQLPASS=LAmP33rG0dt"
     links:
         - "sqlserver"
+    environment:
+        - CONNECTIONSTRING=Server=sqlserver;Database=RestaurantDB;User Id=sa;Password=LAmP33rG0dt;
   sqlserver:
     image: ${DOCKER_REGISTRY-}sqlserver
     build:

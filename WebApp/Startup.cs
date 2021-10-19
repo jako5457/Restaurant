@@ -24,9 +24,9 @@ namespace WebApp
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var args = Environment.GetCommandLineArgs().Skip(1).ToArray();
+            string? ConnectionString = Environment.GetEnvironmentVariable("CONNECTIONSTRING");
 
-            if (args.Length == 0)
+            if (ConnectionString == null)
             {
                 //Bruger Lokal database til debugging
                 services.AddDbContext<AppDbContext>(options => options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
@@ -34,7 +34,15 @@ namespace WebApp
             else
             {
                 //Bruges til at sætte databasen op til docker compose
-                services.AddDbContext<AppDbContext>(options => options.UseSqlServer($"Server={args[0]};Database={args[1]};User Id={args[2]};Password={args[3]};"));
+                services.AddDbContext<AppDbContext>(options => options.UseSqlServer(ConnectionString));
+
+                DbContextOptionsBuilder<AppDbContext> contextOptionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+                contextOptionsBuilder.UseSqlServer(ConnectionString);
+
+                using (AppDbContext context = new AppDbContext(contextOptionsBuilder.Options))
+                {
+                    context.Database.EnsureCreated();
+                }
             }
 
             services.AddScoped<IRestaurantService, RestaurantService>();

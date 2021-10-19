@@ -15,7 +15,6 @@ namespace OdeToFoodWebApp.Pages.Restaurants
         [BindProperty(SupportsGet = true)]
         public string SearchTerm { get; set; }
 
-
         private readonly IRestaurantService _restaurantService;
 
         public ListModel(IRestaurantService restaurantService)

@@ -14,9 +14,6 @@
     </None>
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
-    <None Include="Scripts\Database.sql" />
-    <None Include="Scripts\entrypoint.sh" />
-    <None Include="Scripts\Run-init.sh" />
     <None Include="SqlServer.Dockerfile" />
   </ItemGroup>
 </Project>

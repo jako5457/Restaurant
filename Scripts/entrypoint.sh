@@ -1,1 +1,0 @@
-/usr/src/app/Scripts/Run-init.sh $1 & /opt/mssql/bin/sqlservr
