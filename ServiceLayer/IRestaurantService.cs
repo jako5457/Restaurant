@@ -1,5 +1,5 @@
 ﻿using DataLayer.Entities;
-using System.Collections;
+using ServiceLayer.Models;
 using System.Linq;
 
 namespace ServiceLayer
@@ -7,7 +7,7 @@ namespace ServiceLayer
     public interface IRestaurantService
     {
         IQueryable<Restaurant> GetRestaurants();
-        IQueryable<Restaurant> GetRestaurantsByName(string name = null);
+        public RestaurantViewModel GetRestaurantsByName(string searchTerm, int currentPage, int pageSize);
         Restaurant GetRestaurantById(int restaurantId);
     }
 }

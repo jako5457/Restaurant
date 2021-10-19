@@ -10,6 +10,11 @@
     <div class="input-group mb-3">
         <input type="search" asp-for="@Model.SearchTerm" class="form-control">
         <div class="input-group-append">
+            <select asp-for="@Model.PageSize"
+                    asp-items="Html.GetEnumSelectList<OdeToFoodWebApp.Pages.Restaurants.ListModel.PageSizeEnum>()"
+                    class="custom-select">
+                <option value="">Pagesize</option>
+            </select>
             <button class="btn btn-outline-secondary" type="submit">
                 <i class="fas fa-search"></i>
             </button>
@@ -47,3 +52,20 @@
         }
     </tbody>
 </table>
+
+
+
+<div>
+    <ul class="pagination">
+        @for (var i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                <a asp-page=""
+                   asp-route-currentpage="@i" 
+                   asp-route-searchTerm="@Model.SearchTerm" 
+                   asp-route-pageSize="@Model.PageSize"
+                   class="page-link">@i</a>
+            </li>
+        }
+    </ul>
+</div>
