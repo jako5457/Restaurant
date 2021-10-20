@@ -10,6 +10,9 @@ services:
         - "sqlserver"
     environment:
         - CONNECTIONSTRING=Server=sqlserver;Database=RestaurantDB;User Id=sa;Password=LAmP33rG0dt;
+    ports:
+        - 5443:443/tcp
+        - 5080:80/tcp
   sqlserver:
     image: ${DOCKER_REGISTRY-}sqlserver
     build:
