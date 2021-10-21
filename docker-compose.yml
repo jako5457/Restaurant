@@ -1,6 +1,7 @@
 version: '3.4'
 
 services:
+
   webapp:
     image: ${DOCKER_REGISTRY-}webapp
     build:
@@ -13,6 +14,7 @@ services:
     ports:
         - 5443:443/tcp
         - 5080:80/tcp
+
   sqlserver:
     image: ${DOCKER_REGISTRY-}sqlserver
     build:

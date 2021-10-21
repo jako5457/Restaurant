@@ -4,6 +4,7 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
+#Default connection string for app
 ENV CONNECTIONSTRING "Server=sqlserver;Database=RestaurantDB;User Id=sa;Password=P@ssw0rd;"
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build

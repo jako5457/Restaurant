@@ -33,7 +33,7 @@ namespace WebApp
             }
             else
             {
-                //Bruges til at sætte databasen op til docker compose
+                //Bruges til at sætte databasen op til docker
                 services.AddDbContext<AppDbContext>(options => options.UseSqlServer(ConnectionString));
 
                 DbContextOptionsBuilder<AppDbContext> contextOptionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
@@ -41,6 +41,7 @@ namespace WebApp
 
                 using (AppDbContext context = new AppDbContext(contextOptionsBuilder.Options))
                 {
+                    //Checker om databasen eksisterer
                     context.Database.EnsureCreated();
                 }
             }
