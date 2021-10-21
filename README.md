@@ -7,6 +7,30 @@ Indeholder følgende:
 
 -- Her indsættes billede af Edit-viewet
 
+## Docker
+
+#### Docker compose
+Kør denne kommando i roden af projektet
+```bash
+docker-compose up
+```
+
+#### Build
+Byg applikation (du skal stå i roden inden du kører den)
+```bash
+docker build -f WebApp/Dockerfile -t restaurants:latest
+```
+Start App
+```bash
+docker run -name restaurants -p 80:80 -p 443:443 -e "CONNECTIONSTRING=CONNECTIONSTRING=Server=<SQL SERVER ADDRESSE>;Database=RestaurantDB;User Id=<DATABASE BRUGER>;Password=<DATABASE PASSWORD>;" jako5457/restaurants" restaurants:latest
+```
+
+#### Docker hub
+
+```bash
+docker run -name restaurants -p 80:80 -p 443:443 -e "CONNECTIONSTRING=Server=<SQL SERVER ADDRESSE>;Database=RestaurantDB;User Id=<DATABASE BRUGER>;Password=<DATABASE PASSWORD>;" jako5457/restaurants
+```
+
 ## ServiceLayer
 RestaurantService udvides med en Edit metode:
 
