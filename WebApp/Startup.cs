@@ -29,7 +29,7 @@ namespace WebApp
             if (ConnectionString == null)
             {
                 //Bruger Lokal database til debugging
-                services.AddDbContext<AppDbContext>(options => options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
+                services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("RestaurantsDb"));
             }
             else
             {
