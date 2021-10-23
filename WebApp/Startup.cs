@@ -24,7 +24,7 @@ namespace WebApp
 
         public void ConfigureServices(IServiceCollection services)
         {
-            string? ConnectionString = Environment.GetEnvironmentVariable("CONNECTIONSTRING");
+            string ConnectionString = Environment.GetEnvironmentVariable("CONNECTIONSTRING");
 
             if (ConnectionString == null)
             {
